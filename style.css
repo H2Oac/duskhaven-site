@@ -1,0 +1,320 @@
+:root {
+    --primary: #8b5cf6;
+    --secondary: #10b981;
+    --liteeco: #facc15;
+    --bg: #050505;
+    --text: #ffffff;
+    --text-muted: #9ca3af;
+    --nav-hover: #ffffff;
+    --glass-bg: rgba(255, 255, 255, 0.02);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-hover: rgba(255, 255, 255, 0.05);
+    --code-bg: #080808;
+    --card-shadow: rgba(0, 0, 0, 0.5);
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+}
+
+[data-theme="light"] {
+    --bg: #f8fafc;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --nav-hover: #8b5cf6;
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(15, 23, 42, 0.1);
+    --glass-hover: rgba(255, 255, 255, 1);
+    --code-bg: #f1f5f9;
+    --card-shadow: rgba(139, 92, 246, 0.1);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+* { font-style: normal !important; }
+
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* 兼容性修复 */
+    border: 1px solid var(--glass-border);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* 阴影优化 */
+}
+
+.glass:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px var(--card-shadow);
+}
+
+/* 高级流光标题效果 */
+header h1 {
+    position: relative;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    background: linear-gradient(to bottom, var(--text) 20%, var(--text-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+}
+
+header h1:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: linear-gradient(
+        120deg, 
+        var(--text) 0%, 
+        var(--text) 40%, 
+        #8b5cf6 50%, 
+        #3b82f6 60%, 
+        var(--text) 70%, 
+        var(--text) 100%
+    );
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 2.5s infinite;
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.3));
+}
+
+[data-theme="light"] header h1:hover {
+    filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.15));
+}
+
+@keyframes shine {
+    0% { background-position: 100% center; }
+    100% { background-position: -100% center; }
+}
+
+/* 鼠标追踪动态标题 */
+.interactive-title {
+    background: radial-gradient(
+        circle at var(--mouse-x) var(--mouse-y), 
+        var(--primary) 0%, 
+        #3b82f6 30%,
+        var(--text) 70%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: --mouse-x 0.1s, --mouse-y 0.1s;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    background-color: var(--secondary);
+    box-shadow: 0 0 12px var(--secondary);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } }
+
+@keyframes menuEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.plugin-label {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+::-webkit-scrollbar { width: 0px; }
+
+.theme-toggle-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.text-adaptive-muted {
+    color: var(--text-muted);
+}
+
+.nav-link:hover {
+    color: var(--nav-hover);
+}
+
+.lang-tab {
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.lang-tab:hover {
+    background: rgba(139, 92, 246, 0.05);
+    color: var(--text);
+}
+
+.lang-tab.active {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--primary);
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.25);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+.code-container {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-radius: 24px;
+    padding: 1.5rem;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    position: relative;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.code-container:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 
+        0 12px 40px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.code-container .border-b {
+    border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+.code-container pre {
+    color: #e5e7eb;
+    line-height: 1.7;
+}
+
+.code-container .text-gray-500 {
+    color: #9ca3af !important;
+    opacity: 0.7;
+}
+
+.code-container .text-adaptive-muted {
+    color: #d1d5db !important;
+}
+
+.cpu-badge {
+    background: linear-gradient(90deg, #ff4d4d, #f9cb28);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+/* 独立板块背景增强 */
+/* 独立板块背景增强 - 更加和谐的渐变注入 */
+.glass-performance { border-color: rgba(249, 115, 22, 0.1); }
+.glass-performance::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, transparent 50%);
+    z-index: -1;
+    border-radius: inherit;
+}
+.glass-performance:hover { border-color: rgba(249, 115, 22, 0.4); }
+
+.glass-compatibility { border-color: rgba(59, 130, 246, 0.1); }
+.glass-compatibility::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    z-index: -1;
+    border-radius: inherit;
+}
+.glass-compatibility:hover { border-color: rgba(59, 130, 246, 0.4); }
+
+.glass-security { border-color: rgba(16, 185, 129, 0.1); }
+.glass-security::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+    z-index: -1;
+    border-radius: inherit;
+}
+.glass-security:hover { border-color: rgba(16, 185, 129, 0.4); }
+
+.glass-qq { border-color: rgba(139, 92, 246, 0.1); }
+.glass-qq::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, transparent 50%);
+    z-index: -1;
+    border-radius: inherit;
+}
+.glass-qq:hover { border-color: rgba(139, 92, 246, 0.4); }
+
+.glass-economy { border-color: rgba(234, 179, 8, 0.1); }
+.glass-economy::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(234, 179, 8, 0.05) 0%, transparent 50%);
+    z-index: -1;
+    border-radius: inherit;
+}
+.glass-economy:hover { border-color: rgba(234, 179, 8, 0.4); }
+
+.glass-modpack { border-color: rgba(79, 70, 229, 0.1); }
+.glass-modpack::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, transparent 50%);
+    z-index: -1;
+    border-radius: inherit;
+}
+.glass-modpack:hover { border-color: rgba(79, 70, 229, 0.4); }
+
+[data-theme="light"] .glass-performance { background: rgba(249, 115, 22, 0.02); }
+[data-theme=\"light\"] .glass-compatibility { background: rgba(59, 130, 246, 0.05); }
+[data-theme=\"light\"] .glass-security { background: rgba(16, 185, 129, 0.05); }
+[data-theme=\"light\"] .glass-qq { background: rgba(139, 92, 246, 0.05); }
+[data-theme=\"light\"] .glass-economy { background: rgba(234, 179, 8, 0.05); }
+[data-theme=\"light\"] .glass-modpack { background: rgba(79, 70, 229, 0.05); }
