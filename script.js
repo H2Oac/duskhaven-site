@@ -120,7 +120,7 @@ function switchCode(lang) {
 // 页面加载完成后更新状态
 async function updateStatus() {
     const statusEl = document.getElementById('player-status');
-    statusEl.innerText = "DUSKHAVEN: EPYC 7791 动力驱动中";
+    statusEl.innerText = "DUSKHAVEN: 服务器在线";
 }
 
 window.onload = updateStatus;
